@@ -25,7 +25,7 @@ public interface EzLoaderInterface<T> {
      * This method is called on a background thread and should fetch your data
      * @return T
      */
-    public T loadInBackground();
+    public T loadInBackground(int id);
 
     /**
      * Helper method to take care of releasing resources associated with an

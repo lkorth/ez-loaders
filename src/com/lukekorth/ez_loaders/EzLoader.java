@@ -51,7 +51,7 @@ public class EzLoader<T> extends AsyncTaskLoader<T> {
      */
     @Override
     public T loadInBackground() {
-        return mLoaderInterface.loadInBackground();
+        return mLoaderInterface.loadInBackground(getId());
     }
 
     /**
