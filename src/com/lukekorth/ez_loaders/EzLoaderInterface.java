@@ -16,22 +16,26 @@
 
 package com.lukekorth.ez_loaders;
 
+import android.support.v4.app.LoaderManager.LoaderCallbacks;
+
 /**
- * This interface should be implemented by the Activity or Fragment making
- * use of Loaders.
+ * This interface should be implemented by the Activity or Fragment making use
+ * of Loaders.
  */
 public interface EzLoaderInterface<T> extends LoaderCallbacks<T> {
+
     /**
      * This method is called on a background thread and should fetch your data
+     * 
      * @return T
      */
     public T loadInBackground(int id);
 
     /**
      * Helper method to take care of releasing resources associated with an
-     * actively loaded data set. For a simple List, there is nothing to do.
-     * For something like a Cursor, we would close it in this method. All
-     * resources associated with the Loader should be released here.
+     * actively loaded data set. For a simple List, there is nothing to do. For
+     * something like a Cursor, we would close it in this method. All resources
+     * associated with the Loader should be released here.
      */
     public void onReleaseResources(T t);
 }
