@@ -6,17 +6,16 @@ If you are not familiar with Loaders please read the [four posts Alex has writte
 
 Support
 -------
-EzLoaders is compatible with Android 1.6 - 4.1 thanks to the
+EzLoaders is compatible with Android 1.6 - 4.2 thanks to the
 Android Compatibility Library.
 
 Usage
 -----
 
 ### Adding the code
-EzLoaders is available in source form and as a JAR in the downloads
+EzLoaders is available as an Android library and as a JAR in the downloads
 section. Simply place the JAR in your Android projects libs folder or
-import the source and add your target version of Android as an external 
-JAR for the project.
+import the library and add it to your Android project.
 
 ### Using the code
 When you want to make use of a Loader, your Activity or Fragment should
