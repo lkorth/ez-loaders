@@ -20,7 +20,7 @@ package com.lukekorth.ez_loaders;
  * This interface should be implemented by the Activity or Fragment making
  * use of Loaders.
  */
-public interface EzLoaderInterface<T> {
+public interface EzLoaderInterface<T> extends LoaderCallbacks<T> {
     /**
      * This method is called on a background thread and should fetch your data
      * @return T

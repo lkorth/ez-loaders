@@ -20,7 +20,7 @@ JAR for the project.
 
 ### Using the code
 When you want to make use of a Loader, your Activity or Fragment should
-implement LoaderManager.LoaderCallbacks<T> and EzLoaderInterface<T>.
+implement EzLoaderInterface<T>.
 
 ```java
 @Override
