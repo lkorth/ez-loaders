@@ -33,11 +33,13 @@ public class EzLoader<T> extends AsyncTaskLoader<T> {
 
     /**
      * @param context
-     * @param broadcastString The broadcast intent that the observer should listen for.
-     * Any time you are modifying data that is used by a loader somewhere in your application
-     * you should send a broadcast when it is updated so Loaders can refresh and your UI can update
-     * 
-     * @param loaderInterface The Activity or Fragment that implements EzLoaderInterface
+     * @param broadcastString The broadcast intent that the observer should
+     *            listen for. Any time you are modifying data that is used by a
+     *            loader somewhere in your application you should send a
+     *            broadcast when it is updated so Loaders can refresh and your
+     *            UI can update
+     * @param loaderInterface The Activity or Fragment that implements
+     *            EzLoaderInterface
      */
     public EzLoader(Context context, String broadcastString, EzLoaderInterface<T> loaderInterface) {
         super(context);
@@ -47,6 +49,7 @@ public class EzLoader<T> extends AsyncTaskLoader<T> {
 
     /**
      * This method is called on a background thread and should fetch your data
+     * 
      * @return T
      */
     @Override
@@ -55,19 +58,21 @@ public class EzLoader<T> extends AsyncTaskLoader<T> {
     }
 
     /**
-     * Called when there is new data to deliver to the client. The superclass will
-     * deliver it to the registered listener (i.e. the LoaderManager), which will
-     * forward the results to the client through a call to onLoadFinished.
+     * Called when there is new data to deliver to the client. The superclass
+     * will deliver it to the registered listener (i.e. the LoaderManager),
+     * which will forward the results to the client through a call to
+     * onLoadFinished.
      */
     @Override
     public void deliverResult(T t) {
         if (isReset()) {
-            // The Loader has been reset; ignore the result and invalidate the data.
-            // This can happen when the Loader is reset while an asynchronous query
-            // is working in the background. That is, when the background thread
-            // finishes its work and attempts to deliver the results to the client,
-            // it will see here that the Loader has been reset and discard any
-            // resources associated with the new data as necessary.
+            // The Loader has been reset; ignore the result and invalidate the
+            // data. This can happen when the Loader is reset while an
+            // asynchronous query is working in the background. That is, when
+            // the background thread finishes its work and attempts to deliver
+            // the results to the client, it will see here that the Loader has
+            // been reset and discard any resources associated with the new data
+            // as necessary.
             if (t != null) {
                 onReleaseResources(t);
                 return;
@@ -81,8 +86,8 @@ public class EzLoader<T> extends AsyncTaskLoader<T> {
         mT = t;
 
         if (isStarted()) {
-            // If the Loader is in a started state, have the superclass deliver the
-            // results to the client.
+            // If the Loader is in a started state, have the superclass deliver
+            // the results to the client.
             super.deliverResult(t);
         }
 
@@ -99,7 +104,8 @@ public class EzLoader<T> extends AsyncTaskLoader<T> {
             deliverResult(mT);
         }
 
-        // Register the observers that will notify the Loader when changes are made.
+        // Register the observers that will notify the Loader when changes are
+        // made.
         if (mObserver == null) {
             IntentFilter filter = new IntentFilter();
             filter.addAction(mBroadcastString);
@@ -115,10 +121,10 @@ public class EzLoader<T> extends AsyncTaskLoader<T> {
         }
 
         if (takeContentChanged()) {
-            // When the observer detects new data, it will call onContentChanged()
-            // on the Loader, which will cause the next call to takeContentChanged()
-            // to return true. If this is ever the case (or if the current data is null),
-            // we force a new load.
+            // When the observer detects new data, it will call
+            // onContentChanged() on the Loader, which will cause the next call
+            // to takeContentChanged() to return true. If this is ever the case
+            // (or if the current data is null), we force a new load.
             forceLoad();
         } else if (mT == null) {
             // If the current data is null... then we should make it non-null
@@ -172,9 +178,9 @@ public class EzLoader<T> extends AsyncTaskLoader<T> {
 
     /**
      * Helper method to take care of releasing resources associated with an
-     * actively loaded data set. For a simple List, there is nothing to do.
-     * For something like a Cursor, we would close it in this method. All
-     * resources associated with the Loader should be released here.
+     * actively loaded data set. For a simple List, there is nothing to do. For
+     * something like a Cursor, we would close it in this method. All resources
+     * associated with the Loader should be released here.
      */
     protected void onReleaseResources(T t) {
         mLoaderInterface.onReleaseResources(t);
