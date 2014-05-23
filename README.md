@@ -22,9 +22,27 @@ import the library and add it to your Android project.
 When you want to make use of a Loader, your Activity or Fragment should
 implement EzLoaderInterface<T>.
 
+To start the loader, in `onCreate` your Activity should call `initLoader`.
+
+Your `LOADER_ID` can be any value, it is returned to you in `onCreateLoader`
+and `loadInBackground` as `id` and `onLoadFinished` and `onLoaderReset` as
+`loader.getId()`. `LOADER_ID` is mainly used to branch on when multiple loaders
+are used in one Activity, you will not need to worry about it if you are only
+using a single loader.
+
+You can pass a `Bundle` of args to `initLoader` which can be used in `onCreateLoader`.
+
+```java
+// on API 11+
+getLoaderManager().initLoader(LOADER_ID, null, this)
+
+// on API < 11
+getSupportLoaderManager().initLoader(LOADER_ID, null, this)
+```
+
 ```java
 @Override
-public Loader<T> onCreateLoader(int arg0, Bundle args) {
+public Loader<T> onCreateLoader(int id, Bundle args) {
 	return new EzLoader<T>(this, "com.lukekorth.REFRESH", this);
 }
 
@@ -39,7 +57,7 @@ public void onLoaderReset(Loader<T> loader) {
 }
 
 @Override
-public T loadInBackground() {
+public T loadInBackground(int id) {
 	//fetch and return your data here, this will be passed to your adapter
 }
 
@@ -52,8 +70,7 @@ public void onReleaseResources(List<Thread> t) {
 
 Dependencies
 ------------
-This project depends on the Android Compatibility Library
-(android-support-v4.jar)
+This project depends on the Android Compatibility Library included via gradle
 
 Demo
 ----
