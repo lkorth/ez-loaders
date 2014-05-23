@@ -1,5 +1,6 @@
-EzLoaders: Making loaders quick and easy
+EzLoaders
 ===============================================
+Making loaders quick and easy.
 
 EzLoaders borrows heavily from [these posts written by Alex Lockwood](http://www.androiddesignpatterns.com/2012/07/loaders-and-loadermanager-background.html)
 If you are not familiar with Loaders please read the [four posts Alex has written on them](http://www.androiddesignpatterns.com/2012/07/loaders-and-loadermanager-background.html)
