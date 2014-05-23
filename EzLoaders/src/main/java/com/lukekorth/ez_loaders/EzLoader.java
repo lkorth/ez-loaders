@@ -211,7 +211,7 @@ public class EzLoader<T> extends AsyncTaskLoader<T> {
      * something like a Cursor, we would close it in this method. All resources
      * associated with the Loader should be released here.
      */
-    protected void onReleaseResources(T t) {
+    private void onReleaseResources(T t) {
         mLoaderInterface.onReleaseResources(t);
     }
 
