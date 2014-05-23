@@ -25,8 +25,8 @@ import android.support.v4.content.LocalBroadcastManager;
 
 public class EzLoader<T> extends AsyncTaskLoader<T> {
 
-    private BroadcastReceiver mObserver;
-    private String mBroadcastString;
+    private BroadcastReceiver mBroadcastReceiver;
+    private String mBroadcastAction;
     private boolean mUseLocalBroadcastManager;
 
     private EzLoaderInterface<T> mLoaderInterface;
@@ -35,7 +35,7 @@ public class EzLoader<T> extends AsyncTaskLoader<T> {
 
     /**
      * @param context
-     * @param broadcastString The broadcast intent that the observer should
+     * @param broadcastAction The broadcast action that the observer should
      *            listen for. Any time you are modifying data that is used by a
      *            loader somewhere in your application you should send a
      *            broadcast when it is updated so Loaders can refresh and your
@@ -43,16 +43,16 @@ public class EzLoader<T> extends AsyncTaskLoader<T> {
      * @param loaderInterface The Activity or Fragment that implements
      *            EzLoaderInterface
      */
-    public EzLoader(Context context, String broadcastString, EzLoaderInterface<T> loaderInterface) {
+    public EzLoader(Context context, String broadcastAction, EzLoaderInterface<T> loaderInterface) {
         super(context);
-        mBroadcastString = broadcastString;
+        mBroadcastAction = broadcastAction;
         mUseLocalBroadcastManager = false;
         mLoaderInterface = loaderInterface;
     }
 
     /**
      * @param context
-     * @param broadcastString The broadcast intent that the observer should
+     * @param broadcastAction The broadcast action that the observer should
      *            listen for. Any time you are modifying data that is used by a
      *            loader somewhere in your application you should send a
      *            broadcast when it is updated so Loaders can refresh and your
@@ -62,10 +62,10 @@ public class EzLoader<T> extends AsyncTaskLoader<T> {
      * @param loaderInterface The Activity or Fragment that implements
      *            EzLoaderInterface
      */
-    public EzLoader(Context context, String broadcastString, boolean useLocalBroadcastManager,
+    public EzLoader(Context context, String broadcastAction, boolean useLocalBroadcastManager,
             EzLoaderInterface<T> loaderInterface) {
         super(context);
-        mBroadcastString = broadcastString;
+        mBroadcastAction = broadcastAction;
         mUseLocalBroadcastManager = useLocalBroadcastManager;
         mLoaderInterface = loaderInterface;
     }
@@ -127,13 +127,13 @@ public class EzLoader<T> extends AsyncTaskLoader<T> {
             deliverResult(mT);
         }
 
-        // Register the observers that will notify the Loader when changes are
+        // Register the BroadcastReceiver that will notify the Loader when changes are
         // made.
-        if (mObserver == null) {
+        if (mBroadcastReceiver == null) {
             IntentFilter filter = new IntentFilter();
-            filter.addAction(mBroadcastString);
+            filter.addAction(mBroadcastAction);
 
-            mObserver = new BroadcastReceiver() {
+            mBroadcastReceiver = new BroadcastReceiver() {
                 @Override
                 public void onReceive(Context context, Intent intent) {
                     EzLoader.this.onContentChanged();
@@ -141,9 +141,9 @@ public class EzLoader<T> extends AsyncTaskLoader<T> {
             };
 
             if (mUseLocalBroadcastManager)
-                LocalBroadcastManager.getInstance(getContext()).registerReceiver(mObserver, filter);
+                LocalBroadcastManager.getInstance(getContext()).registerReceiver(mBroadcastReceiver, filter);
             else
-                getContext().registerReceiver(mObserver, filter);
+                getContext().registerReceiver(mBroadcastReceiver, filter);
         }
 
         if (takeContentChanged()) {
@@ -181,12 +181,12 @@ public class EzLoader<T> extends AsyncTaskLoader<T> {
         }
 
         // The Loader is being reset, so we should stop monitoring for changes.
-        if (mObserver != null) {
+        if (mBroadcastReceiver != null) {
             if (mUseLocalBroadcastManager)
-                LocalBroadcastManager.getInstance(getContext()).unregisterReceiver(mObserver);
+                LocalBroadcastManager.getInstance(getContext()).unregisterReceiver(mBroadcastReceiver);
             else
-                getContext().unregisterReceiver(mObserver);
-            mObserver = null;
+                getContext().unregisterReceiver(mBroadcastReceiver);
+            mBroadcastReceiver = null;
         }
     }
 
