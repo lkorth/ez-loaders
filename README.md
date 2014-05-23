@@ -5,6 +5,8 @@ Making loaders quick and easy.
 EzLoaders borrows heavily from [these posts written by Alex Lockwood](http://www.androiddesignpatterns.com/2012/07/loaders-and-loadermanager-background.html)
 If you are not familiar with Loaders please read the [four posts Alex has written on them](http://www.androiddesignpatterns.com/2012/07/loaders-and-loadermanager-background.html)
 
+Additional information about Loaders can be found in the [Android documentation](http://developer.android.com/guide/components/loaders.html)
+
 Support
 -------
 EzLoaders is compatible with Android 1.6 - 4.2 thanks to the
@@ -43,27 +45,29 @@ getSupportLoaderManager().initLoader(LOADER_ID, null, this)
 ```java
 @Override
 public Loader<T> onCreateLoader(int id, Bundle args) {
-	return new EzLoader<T>(this, "com.lukekorth.REFRESH", this);
+    // com.lukekorth.REFRESH is the broadcast action that will cause
+    // the loader to refresh it's data
+    return new EzLoader<T>(this, "com.lukekorth.REFRESH", this);
 }
 
 @Override
 public void onLoadFinished(Loader<T> loader, T data) {
-	mAdapter.setData(data);
+    mAdapter.setData(data);
 }
 
 @Override
 public void onLoaderReset(Loader<T> loader) {
-	mAdapter.setData(null);
+    mAdapter.setData(null);
 }
 
 @Override
 public T loadInBackground(int id) {
-	//fetch and return your data here, this will be passed to your adapter
+    //fetch and return your data here, this will be passed to your adapter
 }
 
 @Override
 public void onReleaseResources(List<Thread> t) {
-	//release any resources you may have used to query data in loadInBackground()
+    //release any resources you may have used to query data in loadInBackground()
 }
 ```
 
