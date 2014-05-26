@@ -16,9 +16,14 @@ Usage
 -----
 
 ### Adding the code
-EzLoaders is available as an Android library and as a JAR in the downloads
-section. Simply place the JAR in your Android projects libs folder or
-import the library and add it to your Android project.
+
+EzLoaders is available on maven central. For those using gradle, simply add the following to your build.gradle
+
+```groovy
+dependencies {
+    compile 'com.lukekorth:ez-loaders:1.2'
+}
+```
 
 ### Using the code
 When you want to make use of a Loader, your Activity or Fragment should
