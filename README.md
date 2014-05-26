@@ -23,7 +23,7 @@ For those using gradle, simply add the following to your build.gradle
 
 ```groovy
 dependencies {
-    compile 'com.lukekorth:ez-loaders:1.2'
+    compile 'com.lukekorth:ez-loaders:1.3'
 }
 ```
 
@@ -33,7 +33,7 @@ Users of maven can add the following to their pom
 <dependency>
     <groupId>com.lukekorth</groupId>
     <artifactId>ez-loaders</artifactId>
-    <version>1.2</version>
+    <version>1.3</version>
 </dependency>
 ```
 
