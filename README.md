@@ -17,12 +17,24 @@ Usage
 
 ### Adding the code
 
-EzLoaders is available on maven central. For those using gradle, simply add the following to your build.gradle
+EzLoaders is available on maven central. 
+
+For those using gradle, simply add the following to your build.gradle
 
 ```groovy
 dependencies {
     compile 'com.lukekorth:ez-loaders:1.2'
 }
+```
+
+Users of maven can add the following to their pom
+
+```xml
+<dependency>
+    <groupId>com.lukekorth</groupId>
+    <artifactId>ez-loaders</artifactId>
+    <version>1.2</version>
+</dependency>
 ```
 
 ### Using the code
