@@ -136,14 +136,15 @@ public class EzLoader<T> extends AsyncTaskLoader<T> {
             mBroadcastReceiver = new BroadcastReceiver() {
                 @Override
                 public void onReceive(Context context, Intent intent) {
-                    EzLoader.this.onContentChanged();
+                    onContentChanged();
                 }
             };
 
-            if (mUseLocalBroadcastManager)
+            if (mUseLocalBroadcastManager) {
                 LocalBroadcastManager.getInstance(getContext()).registerReceiver(mBroadcastReceiver, filter);
-            else
+            } else {
                 getContext().registerReceiver(mBroadcastReceiver, filter);
+            }
         }
 
         if (takeContentChanged()) {
@@ -182,10 +183,11 @@ public class EzLoader<T> extends AsyncTaskLoader<T> {
 
         // The Loader is being reset, so we should stop monitoring for changes.
         if (mBroadcastReceiver != null) {
-            if (mUseLocalBroadcastManager)
+            if (mUseLocalBroadcastManager) {
                 LocalBroadcastManager.getInstance(getContext()).unregisterReceiver(mBroadcastReceiver);
-            else
+            } else {
                 getContext().unregisterReceiver(mBroadcastReceiver);
+            }
             mBroadcastReceiver = null;
         }
     }
