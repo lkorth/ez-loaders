@@ -16,16 +16,16 @@
 
 package com.lukekorth.ez_loaders;
 
-import android.support.v4.app.LoaderManager.LoaderCallbacks;
+import android.app.LoaderManager;
 
 /**
  * This interface should be implemented by the Activity or Fragment making use
  * of Loaders.
  */
-public interface EzLoaderInterface<T> extends LoaderCallbacks<T> {
+public interface EzLoaderInterface<T> extends LoaderManager.LoaderCallbacks<T> {
 
     /**
-     * This method is called on a background thread and should fetch your data
+     * Called on a background thread to fetch data from a database or network request.
      * 
      * @return T
      */

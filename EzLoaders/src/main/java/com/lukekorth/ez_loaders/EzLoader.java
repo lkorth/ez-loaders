@@ -16,11 +16,11 @@
 
 package com.lukekorth.ez_loaders;
 
+import android.content.AsyncTaskLoader;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.support.v4.content.AsyncTaskLoader;
 import android.support.v4.content.LocalBroadcastManager;
 
 public class EzLoader<T> extends AsyncTaskLoader<T> {
@@ -39,9 +39,9 @@ public class EzLoader<T> extends AsyncTaskLoader<T> {
      *            listen for. Any time you are modifying data that is used by a
      *            loader somewhere in your application you should send a
      *            broadcast when it is updated so Loaders can refresh and your
-     *            UI can update
+     *            UI can update.
      * @param loaderInterface The Activity or Fragment that implements
-     *            EzLoaderInterface
+     *            EzLoaderInterface.
      */
     public EzLoader(Context context, String broadcastAction, EzLoaderInterface<T> loaderInterface) {
         super(context);
@@ -56,11 +56,11 @@ public class EzLoader<T> extends AsyncTaskLoader<T> {
      *            listen for. Any time you are modifying data that is used by a
      *            loader somewhere in your application you should send a
      *            broadcast when it is updated so Loaders can refresh and your
-     *            UI can update
+     *            UI can update.
      * @param useLocalBroadcastManager A boolean indicating if EzLoader should
-     *            use the LocalBroadcastManager
+     *            use the LocalBroadcastManager.
      * @param loaderInterface The Activity or Fragment that implements
-     *            EzLoaderInterface
+     *            EzLoaderInterface.
      */
     public EzLoader(Context context, String broadcastAction, boolean useLocalBroadcastManager,
             EzLoaderInterface<T> loaderInterface) {
@@ -71,8 +71,8 @@ public class EzLoader<T> extends AsyncTaskLoader<T> {
     }
 
     /**
-     * This method is called on a background thread and should fetch your data
-     * 
+     * Called on a background thread to fetch data from a database or network request.
+     *
      * @return T
      */
     @Override

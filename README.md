@@ -1,5 +1,6 @@
 EzLoaders
 ===============================================
+
 Making loaders quick and easy.
 
 EzLoaders borrows heavily from [these posts written by Alex Lockwood](http://www.androiddesignpatterns.com/2012/07/loaders-and-loadermanager-background.html)
@@ -9,15 +10,15 @@ Additional information about Loaders can be found in the [Android documentation]
 
 Support
 -------
-EzLoaders is compatible with Android 1.6 - 4.2 thanks to the
-Android Compatibility Library.
+
+EzLoaders is compatible with Android API 15 and up.
 
 Usage
 -----
 
 ### Adding the code
 
-EzLoaders is available on maven central. 
+EzLoaders is available on maven central.
 
 For those using gradle, simply add the following to your build.gradle
 
@@ -38,6 +39,7 @@ Users of maven can add the following to their pom
 ```
 
 ### Using the code
+
 When you want to make use of a Loader, your Activity or Fragment should
 implement EzLoaderInterface<T>.
 
@@ -52,11 +54,7 @@ using a single loader.
 You can pass a `Bundle` of args to `initLoader` which can be used in `onCreateLoader`.
 
 ```java
-// on API 11+
 getLoaderManager().initLoader(LOADER_ID, null, this)
-
-// on API < 11
-getSupportLoaderManager().initLoader(LOADER_ID, null, this)
 ```
 
 ```java
@@ -88,21 +86,14 @@ public void onReleaseResources(List<Thread> t) {
 }
 ```
 
-
-Dependencies
-------------
-This project depends on the Android Compatibility Library included via gradle
-
-Demo
-----
-Coming soon!
-
 License
 -------
+
 The code in this project is licensed under the Apache
 Software License 2.0, for details see the included LICENSE
 file.
 
 Issues
 ---------
+
 If you have encountered a bug, please post an [issue](https://github.com/lkorth/ez-loaders/issues).
